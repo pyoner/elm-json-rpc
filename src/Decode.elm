@@ -1,7 +1,22 @@
 module Decode exposing (response)
 
-import Json.Decode exposing (..)
-import Types exposing (..)
+import Json.Decode
+    exposing
+        ( Decoder
+        , field
+        , value
+        , oneOf
+        , map
+        , map3
+        , int
+        , string
+        , maybe
+        , andThen
+        )
+import Types exposing (Id(..), Error, ResponseResult, Response)
+
+
+-- Decoders
 
 
 id : Decoder Id

@@ -1,20 +1,22 @@
-module Encode exposing (..)
+module Encode exposing (request)
 
 import Json.Encode
     exposing
         ( Value
-        , encode
         , int
         , string
         , object
         , list
         )
-import Types exposing (..)
+import Types exposing (Id(..), Params(..), Request)
 
 
-encodeId : Id -> Value
-encodeId id =
-    case id of
+-- Encoders
+
+
+id : Id -> Value
+id a =
+    case a of
         IdString v ->
             string v
 
@@ -22,9 +24,9 @@ encodeId id =
             int v
 
 
-encodeParams : Params -> Value
-encodeParams params =
-    case params of
+params : Params -> Value
+params p =
+    case p of
         ParamsList v ->
             list v
 
@@ -32,31 +34,31 @@ encodeParams params =
             object v
 
 
-encodeRequest : Request -> String
-encodeRequest request =
+request : Request -> Value
+request r =
     let
         base =
-            [ ( "jsonrpc", string request.jsonrpc )
-            , ( "method", string request.method )
+            [ ( "jsonrpc", string r.jsonrpc )
+            , ( "method", string r.method )
             ]
 
-        params =
-            case request.params of
+        params_ =
+            case r.params of
                 Nothing ->
                     []
 
                 Just v ->
-                    [ ( "params", encodeParams v ) ]
+                    [ ( "params", params v ) ]
 
-        id =
-            case request.id of
+        id_ =
+            case r.id of
                 Nothing ->
                     []
 
                 Just v ->
-                    [ ( "id", encodeId v ) ]
+                    [ ( "id", id v ) ]
 
         items =
-            base ++ params ++ id
+            base ++ params_ ++ id_
     in
-        encode 0 (object items)
+        object items
