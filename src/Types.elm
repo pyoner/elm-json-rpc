@@ -1,6 +1,5 @@
 module Types exposing (..)
 
-import Dict exposing (Dict)
 import Json.Encode exposing (Value)
 
 
@@ -15,7 +14,7 @@ type Id
 
 type Params
     = ParamsList (List Value)
-    | ParamsDict (Dict String Value)
+    | ParamsObject (List ( String, Value ))
 
 
 type alias Version =
