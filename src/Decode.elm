@@ -1,46 +1,46 @@
-module Decode exposing (..)
+module Decode exposing (response)
 
 import Json.Decode exposing (..)
 import Types exposing (..)
 
 
-idDecoder : Decoder Id
-idDecoder =
+id : Decoder Id
+id =
     oneOf
-        [ map (\id -> IdInt id)
+        [ map (\v -> IdInt v)
             int
-        , map (\id -> IdString id)
+        , map (\v -> IdString v)
             string
         ]
 
 
-errorDecoder : Decoder Error
-errorDecoder =
+error : Decoder Error
+error =
     map3 Error
         (field "code" int)
         (field "message" string)
         (maybe (field "data" value))
 
 
-resultDecoder : Decoder ResponseResult
-resultDecoder =
+result : Decoder ResponseResult
+result =
     (maybe (field "error" value))
         |> andThen
             (\err ->
                 case err of
                     Just v ->
-                        map (\err -> Err err)
-                            errorDecoder
+                        map (\v -> Err v)
+                            error
 
                     Nothing ->
-                        map (\result -> Ok result)
+                        map (\v -> Ok v)
                             (field "result" value)
             )
 
 
-responseDecoder : Decoder Response
-responseDecoder =
+response : Decoder Response
+response =
     map3 Response
         (field "jsonrpc" string)
-        resultDecoder
-        (maybe (field "id" idDecoder))
+        result
+        (maybe (field "id" id))
