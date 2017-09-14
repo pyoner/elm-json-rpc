@@ -33,9 +33,13 @@ type alias Request =
     }
 
 
+type alias ResponseResult =
+    Result Error Value
+
+
 type alias Response =
     { jsonrpc : Version
-    , result : Result Error Value
+    , result : ResponseResult
     , id : Maybe Id
     }
 
