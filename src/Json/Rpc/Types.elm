@@ -1,4 +1,4 @@
-module Types exposing (..)
+module Json.Rpc.Types exposing (..)
 
 import Json.Encode exposing (Value)
 
