@@ -3,6 +3,7 @@ module Json.Rpc.Types exposing (..)
 import Json.Encode exposing (Value)
 
 
+version : String
 version =
     "2.0"
 
