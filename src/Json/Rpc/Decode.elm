@@ -13,7 +13,7 @@ import Json.Decode
         , maybe
         , andThen
         )
-import Types exposing (Id(..), Error, ResponseResult, Response)
+import Json.Rpc.Types exposing (Id(..), Error, ResponseResult, Response)
 
 
 -- Decoders

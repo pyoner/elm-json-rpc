@@ -8,7 +8,7 @@ import Json.Encode
         , object
         , list
         )
-import Types exposing (Id(..), Params(..), Request)
+import Json.Rpc.Types exposing (Id(..), Params(..), Request)
 
 
 -- Encoders
