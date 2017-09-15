@@ -1,4 +1,4 @@
-module Encode exposing (request)
+module Json.Rpc.Encode exposing (request)
 
 import Json.Encode
     exposing

@@ -1,4 +1,4 @@
-module Decode exposing (response)
+module Json.Rpc.Decode exposing (response)
 
 import Json.Decode
     exposing
