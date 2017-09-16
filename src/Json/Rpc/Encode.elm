@@ -1,4 +1,10 @@
-module Json.Rpc.Encode exposing (request)
+module Json.Rpc.Encode exposing (request, batchRequest)
+
+{-| This module implement encoders
+
+# Encoders
+@docs request, batchRequest
+-}
 
 import Json.Encode
     exposing
@@ -8,7 +14,7 @@ import Json.Encode
         , object
         , list
         )
-import Json.Rpc.Types exposing (Id(..), Params(..), Request)
+import Json.Rpc.Types exposing (Id(..), Params(..), Request, BatchRequest)
 
 
 -- Encoders
@@ -34,6 +40,8 @@ params p =
             object v
 
 
+{-| Function encode Request to Value
+-}
 request : Request -> Value
 request r =
     let
@@ -62,3 +70,10 @@ request r =
             base ++ params_ ++ id_
     in
         object items
+
+
+{-| Function encode BatchRequest to Value
+-}
+batchRequest : BatchRequest -> Value
+batchRequest batch =
+    list <| List.map request batch
