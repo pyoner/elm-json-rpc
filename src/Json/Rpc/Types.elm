@@ -8,13 +8,17 @@ module Json.Rpc.Types
         , Response
         , ResponseResult
         , Error
+        , BatchRequest
+        , BatchResponse
         )
 
 {-| Types and functions
 
-# Types
+# Base types
 @docs Id, Params, Version, Method, Request, Response, ResponseResult, Error
 
+# Batch types
+@docs BatchRequest, BatchResponse
 -}
 
 import Json.Encode exposing (Value)
@@ -79,3 +83,15 @@ type alias Error =
     , message : String
     , data : Maybe Value
     }
+
+
+{-| Type alias BatchRequest
+-}
+type alias BatchRequest =
+    List Request
+
+
+{-| Type alias BatchResponse
+-}
+type alias BatchResponse =
+    List Response
