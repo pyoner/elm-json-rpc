@@ -1,6 +1,6 @@
 module Json.Rpc.Encode exposing (request, batchRequest)
 
-{-| This module implement encoders
+{-| This module implements encoders
 
 # Encoders
 @docs request, batchRequest
