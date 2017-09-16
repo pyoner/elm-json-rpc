@@ -1,4 +1,10 @@
-module Json.Rpc.Decode exposing (response)
+module Json.Rpc.Decode exposing (response, batchResponse)
+
+{-| This module implements decoders
+
+# Decoders
+@docs response, batchResponse
+-}
 
 import Json.Decode
     exposing
@@ -12,8 +18,16 @@ import Json.Decode
         , string
         , maybe
         , andThen
+        , list
         )
-import Json.Rpc.Types exposing (Id(..), Error, ResponseResult, Response)
+import Json.Rpc.Types
+    exposing
+        ( Id(..)
+        , Error
+        , ResponseResult
+        , Response
+        , BatchResponse
+        )
 
 
 -- Decoders
@@ -53,9 +67,18 @@ result =
             )
 
 
+{-| Function decode value to Respose
+-}
 response : Decoder Response
 response =
     map3 Response
         (field "jsonrpc" string)
         result
         (maybe (field "id" id))
+
+
+{-| Function decode value to BatchResponse
+-}
+batchResponse : Decoder BatchResponse
+batchResponse =
+    list response
