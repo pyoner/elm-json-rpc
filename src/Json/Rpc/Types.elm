@@ -8,18 +8,13 @@ module Json.Rpc.Types
         , Response
         , ResponseResult
         , Error
-        , version
-        , createRequest
-        , createNotification
         )
 
 {-| Types and functions
 
 # Types
-@docs version, Id, Params, Version, Method, Request, Response, ResponseResult, Error
+@docs Id, Params, Version, Method, Request, Response, ResponseResult, Error
 
-# Functions
-@docs createRequest, createNotification
 -}
 
 import Json.Encode exposing (Value)
@@ -84,28 +79,3 @@ type alias Error =
     , message : String
     , data : Maybe Value
     }
-
-
-{-| Default version ("2.0") of JSON-RPC
--}
-version : Version
-version =
-    "2.0"
-
-
-{-| Helper function to create Request
--}
-createRequest : Method -> Maybe Params -> Maybe Id -> Request
-createRequest method params id =
-    { jsonrpc = version
-    , method = method
-    , params = params
-    , id = id
-    }
-
-
-{-| Helper function to create Notification
--}
-createNotification : Method -> Maybe Params -> Request
-createNotification method params =
-    createRequest method params Nothing

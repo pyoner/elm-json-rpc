@@ -7,6 +7,7 @@
         "src"
     ],
     "exposed-modules": [
+        "Json.Rpc",
         "Json.Rpc.Decode",
         "Json.Rpc.Encode",
         "Json.Rpc.Types"
